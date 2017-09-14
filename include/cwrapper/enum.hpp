@@ -28,7 +28,7 @@ constexpr T operator|(T lhs, T rhs)
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
 constexpr T& operator|=(T& lhs, T rhs)
 {
-    return lhs = static_cast<T>(static_cast<std::underlying_type_t<T>>(lhs) | static_cast<std::underlying_type_t<T>>(rhs));
+    return lhs = lhs | rhs;
 }
 
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
@@ -40,7 +40,7 @@ constexpr inline T operator&(T lhs, T rhs)
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
 constexpr inline T& operator&=(T& lhs, T rhs)
 {
-    return lhs = static_cast<T>(static_cast<std::underlying_type_t<T>>(lhs) & static_cast<std::underlying_type_t<T>>(rhs));
+    return lhs = lhs & rhs;
 }
 
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
@@ -52,13 +52,37 @@ constexpr inline T operator^(T lhs, T rhs)
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
 constexpr inline T& operator^=(T& lhs, T rhs)
 {
-    return lhs = static_cast<T>(static_cast<std::underlying_type_t<T>>(lhs) ^ static_cast<std::underlying_type_t<T>>(rhs));
+    return lhs = lhs ^ rhs;
 }
 
 template <typename T, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
-constexpr inline T operator~(T sub)
+constexpr inline T operator~(T val)
 {
-    return static_cast<T>(~static_cast<std::underlying_type_t<T>>(sub));
+    return static_cast<T>(~static_cast<std::underlying_type_t<T>>(val));
+}
+
+template <typename T, typename T2, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
+constexpr inline T operator<<(T lhs, T2 rhs)
+{
+    return static_cast<T>(static_cast<std::underlying_type_t<T>>(lhs) << rhs);
+}
+
+template <typename T, typename T2, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
+constexpr inline T& operator<<=(T& lhs, T2 rhs)
+{
+    return lhs = lhs << rhs;
+}
+
+template <typename T, typename T2, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
+constexpr inline T operator>>(T lhs, T2 rhs)
+{
+    return static_cast<T>(static_cast<std::underlying_type_t<T>>(lhs) >> rhs);
+}
+
+template <typename T, typename T2, typename = std::enable_if_t<cwrapper::EnumTraits<T>::isBitFlag>>
+constexpr inline T& operator>>=(T& lhs, T2 rhs)
+{
+    return lhs = lhs >> rhs;
 }
 
 #endif // CWRAPPER_ENUM_HPP
