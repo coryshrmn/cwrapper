@@ -63,6 +63,7 @@ Resource<Handle, Deleter, Empty>& Resource<Handle, Deleter, Empty>::operator=(Re
     this->~Resource();
     _handle = source._handle;
     source._handle = Empty;
+    return *this;
 }
 
 template<typename Handle, typename Deleter, Handle Empty>
