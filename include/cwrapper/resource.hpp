@@ -90,7 +90,7 @@ Handle Resource<Handle, Deleter, Empty>::getHandle() const
 template<typename Handle, typename Deleter, Handle Empty>
 void Resource<Handle, Deleter, Empty>::setHandle(Handle handle)
 {
-    ~Resource();
+    this->~Resource();
     _handle = handle;
 }
 
