@@ -1,8 +1,9 @@
 language: cpp
+dist: trusty
+sudo: false
 matrix:
     include:
         -   os: linux
-            dist: trusty
             compiler: gcc
             addons: &gcc6
                 apt:
@@ -10,9 +11,8 @@ matrix:
                     packages: ['g++-6']
             env: COMPILER='g++-6'
         -   os: linux
-            dist: trusty
             compiler: clang
-            addons: &clang4.0
+            addons: &clang40
                 apt:
                     sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-4.0']
                     packages: ['clang-4.0']
