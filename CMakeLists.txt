@@ -15,7 +15,7 @@
 # The cwrapper library is header only, and does not require any compilation.
 # This CMakeLists.txt builds cwrapper tests.
 
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.2.2 FATAL_ERROR)
 
 project(cwrapper C CXX)
 
