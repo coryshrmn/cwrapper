@@ -21,8 +21,8 @@ before_script:
     - export CXX=${COMPILER}
     - cd ${TRAVIS_BUILD_DIR}
     - mkdir build && cd build
-    - cmake ..
-    - cmake --build . -DCMAKE_BUILD_TYPE=Debug -Wdev
+    - cmake -DCMAKE_BUILD_TYPE=Debug -Wdev ..
+    - cmake --build .
 script:
     - cd ${TRAVIS_BUILD_DIR}/build
     - ./cwrapper-test
