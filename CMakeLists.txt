@@ -41,7 +41,7 @@ add_executable(cwrapper-test
 )
 add_test(NAME cwrapper-test COMMAND cwrapper-test)
 
-set_property(TARGET ${PROJECT_NAME}-test PROPERTY CXX_STANDARD 17)
+set_property(TARGET ${PROJECT_NAME}-test PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${PROJECT_NAME}-test PROPERTY CXX_STANDARD_REQUIRED ON)
 
 # Download and compile Googletest library
