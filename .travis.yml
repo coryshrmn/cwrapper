@@ -2,17 +2,26 @@ language: cpp
 matrix:
     include:
         -   os: linux
+            dist: trusty
             compiler: gcc
             addons: &gcc6
                 apt:
                     sources: ['ubuntu-toolchain-r-test']
                     packages: ['g++-6']
-            env: COMPILER='g++-6' BUILD_TYPE='Debug'
+            env: COMPILER='g++-6'
+        -   os: linux
+            dist: trusty
+            compiler: clang
+            addons: &clang4.0
+                apt:
+                    sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-4.0']
+                    packages: ['clang-4.0']
+            env: COMPILER='clang++-4.0'
 before_script:
     - export CXX=${COMPILER}
     - cd ${TRAVIS_BUILD_DIR}
-    - cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-    - cd build
+    - mkdir build && cd build
+    - cmake ..
+    - cmake .. --build . -DCMAKE_BUILD_TYPE=Debug -Wdev
 script:
-    - make -j 2
     - ./cwrapper-test
