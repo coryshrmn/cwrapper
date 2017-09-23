@@ -14,7 +14,7 @@ matrix:
             compiler: clang
             addons: &clang40
                 apt:
-                    sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-4.0']
+                    sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
                     packages: ['clang-4.0']
             env: COMPILER='clang++-4.0'
 before_script:
@@ -24,4 +24,5 @@ before_script:
     - cmake ..
     - cmake .. --build . -DCMAKE_BUILD_TYPE=Debug -Wdev
 script:
+    - cd build
     - ./cwrapper-test
