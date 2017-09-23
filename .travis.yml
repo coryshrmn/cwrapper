@@ -2,17 +2,17 @@ language: cpp
 matrix:
     include:
         -   os: linux
-            addons:
+            compiler: gcc
+            addons: &gcc6
                 apt:
-                    sources:
-                        -   ubuntu-toolchain-r-test
-                    packages:
-                        - g++-4.9
-            env:
-                - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
-before_install:
-    - eval "$(MATRIX_EVAL)"
+                    sources: ['ubuntu-toolchain-r-test']
+                    packages: ['g++-6']
+            env: COMPILER='g++-6' BUILD_TYPE='Debug'
 before_script:
-    - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && cmake --build .
+    - export CXX=${COMPILER}
+    - cd ${TRAVIS_BUILD_DIR}
+    - cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+    - cd build
 script:
-    - cd build && ./cwrapper-test
+    - make -j 2
+    - ./cwrapper-test
