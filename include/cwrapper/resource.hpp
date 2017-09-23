@@ -32,11 +32,14 @@ class Resource
 {
 public:
 
-    explicit Resource(Handle handle = Empty);
+    Resource() = default;
+    explicit Resource(Handle handle);
     Resource(const Resource& source) = delete;
     Resource(Resource&& source);
+
     Resource& operator=(const Resource& source) = delete;
     Resource& operator=(Resource&& source);
+
     ~Resource();
 
     /**
@@ -58,7 +61,7 @@ public:
     void setHandle(Handle handle);
 
 private:
-    Handle _handle;
+    Handle _handle {};
 };
 
 template<typename Handle, typename Deleter, Handle Empty>
